@@ -1,21 +1,31 @@
 import React from 'react'
 import favicon from '../assets/favicon.png'
+import fingerPrint from '../assets/fingerprint.png'
+import { BiLogIn } from "react-icons/bi";
+
 
 function Login() {
   return (
     <div className='relative'>
-      <div className='h-52 w-full bg-[#1c3669] p-3 flex items-center gap-3'>
-        <img src={favicon} alt='img'  className='h-8 bg-white rounded-xl'/>
-        <span>ChatVerse</span>
+      <div className='h-[220px] w-full bg-[#1c3669] p-3  text-white'>
+        <div className='flex items-center gap-4 ml-48 mt-20 uppercase font-bold'>
+          <img src={favicon} alt='img' className='h-8 bg-white rounded-xl' />
+          <span>ChatVerse</span>
+        </div>
       </div>
-      <div style={{ height: 'calc(100vh - 13rem)' }} className=' bg-gray-300 w-full'>
 
+      <div className=' relative bg-[#eff2f5] h-[calc(100vh-220px)] w-full flex justify-center'>
+        <div className='absolute h-[80%] w-3/4 bg-white top-[-70px] shadow-2xl  rounded-lg flex flex-col justify-center items-center gap-1'>
+          
+            <img src={fingerPrint} alt=''  className='h-20'/>
+            <p>Sign In</p>
+            <p>Sign in with your google account to get started.</p>
+            <button className='bg-[#1c3669] text-white p-2 rounded-lg '>Sign in with Google <span><BiLogIn /></span></button>
+            
+          
+        </div>
       </div>
 
-      <div className='absolute h-3/4 w-3/4 bg-white'>
-        <img src='' alt='' />
-        <p>Sign In</p>
-      </div>
     </div>
   )
 }
