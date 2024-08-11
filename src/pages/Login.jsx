@@ -7,13 +7,14 @@ import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { auth } from '../../firebase';
 
 
-function Login() {
+function Login({setIsLoggedIn}) {
   const navigate = useNavigate()
   
   const handleLogin = async ()=>{
     const result = await signInWithPopup(auth, new GoogleAuthProvider)
     console.log(result)
-    navigate("/")
+    setIsLoggedIn(true)
+    // navigate("/")
   }
   
   return (

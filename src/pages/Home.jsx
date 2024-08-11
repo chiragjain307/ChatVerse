@@ -3,16 +3,18 @@ import { useNavigate } from 'react-router-dom'
 import { signOut } from 'firebase/auth'
 import { auth } from '../../firebase'
 
-function Home() {
+function Home({setIsLoggedIn}) {
   const navigate = useNavigate()
 
   const handlePage = async () =>{
     await signOut(auth)
-    navigate("/login")
+    setIsLoggedIn(false)
+    // navigate("/login")
   }
+  
   return (
     <div>Home
-      <button onClick={handlePage}>Login Page</button>
+      <button onClick={handlePage}>Logout</button>
     </div>
   )
 }
