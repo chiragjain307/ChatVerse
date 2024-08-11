@@ -2,9 +2,20 @@ import React from 'react'
 import favicon from '../assets/favicon.png'
 import fingerPrint from '../assets/fingerprint.png'
 import { BiLogIn } from "react-icons/bi";
+import { useNavigate } from 'react-router-dom';
+import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import { auth } from '../../firebase';
 
 
 function Login() {
+  const navigate = useNavigate()
+  
+  const handleLogin = async ()=>{
+    const result = await signInWithPopup(auth, new GoogleAuthProvider)
+    console.log(result)
+    navigate("/")
+  }
+  
   return (
     <div className='relative'>
       <div className='h-[220px] w-full bg-[#1c3669] p-3  text-white'>
@@ -20,7 +31,7 @@ function Login() {
           <img src={fingerPrint} alt='' className='h-20' />
           <p className='mt-4 font-bold text-xl'>Sign In</p>
           <p className='text-gray-400'>Sign in with your google account to get started.</p>
-          <button className='bg-[#1c3669] text-white p-2 rounded-lg flex items-center gap-1 mt-4'>Sign in with Google<BiLogIn /></button>
+          <button className='bg-[#1c3669] text-white p-2 rounded-lg flex items-center gap-1 mt-4' onClick={handleLogin}>Sign in with Google<BiLogIn /></button>
 
 
         </div>
