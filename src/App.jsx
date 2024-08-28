@@ -1,28 +1,29 @@
 import React, { useState } from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, useNavigate } from 'react-router-dom'
 
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Chat from './pages/Chat'
 import PageNotFound from './pages/PageNotFound'
+import ProtectedRoute from './pages/ProtectedRoute'
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
-
-  function ProtectedRoute({ Home, Login }) {
-    if (isLoggedIn) {
-      return Home
-    }
-    else {
-      return Login
-    }
-  }
+  const navigate = useNavigate()
 
   return (
     <Routes>
-      <Route path='/' element={<ProtectedRoute Home={<Home setIsLoggedIn={setIsLoggedIn} />} Login={<Login setIsLoggedIn={setIsLoggedIn} />} />}></Route>
-      <Route path='/login' element={<Login />}></Route>
-      <Route path='/chat/:uniqueId' element={<Chat />}></Route>
+      
+      <Route path='/' element={<ProtectedRoute isLoggedIn={isLoggedIn}>
+        <Home setIsLoggedIn={setIsLoggedIn} />
+      </ProtectedRoute>}></Route>
+      
+      <Route path='/chat/:uniqueId' element={<ProtectedRoute isLoggedIn={isLoggedIn}>
+        <Chat />
+      </ProtectedRoute>}></Route>
+      
+      <Route path='/login' element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />}></Route>
+      
       <Route path='*' element={<PageNotFound />}></Route>
     </Routes>
   )
